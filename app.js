@@ -124,3 +124,36 @@ async function performOperations() {
 }
 
 //Implementation on PerformOperation
+
+
+async function main() {
+  console.log('Welcome to the Console Calculator!');
+  console.log('Enter two numbers to perform operations (add, subtract, multiply, divide, average).');
+  console.log('Type "quit" at any prompt to exit.\n');
+
+  while (true) {
+    try {
+      const response = await new Promise((resolve) => {
+        rl.question('Ready for calculation? (y/n or "quit"): ', (input) => {
+          resolve(input.toLowerCase().trim());
+        });
+      });
+
+      if (response === 'quit' || response === 'n' || response === 'no') {
+        console.log('Goodbye!');
+        rl.close();
+        break;
+      } else if (response === 'y' || response === 'yes') {
+        await performOperations();
+      } else {
+        console.log('Invalid response. Please type y, n, or quit.\n');
+      }
+    } catch (error) {
+      console.error('Unexpected error:', error.message);
+    }
+  }
+}
+
+main();
+
+//Finished!!
